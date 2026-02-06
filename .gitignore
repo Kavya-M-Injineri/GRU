@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Models and Pickles (Large files)
+*.h5
+*.pickle
+
+# Uploads and temporary files
+uploads/*
+!uploads/.gitkeep
+
+# Other
+.vscode/
+.idea/
+.DS_Store
+archive/

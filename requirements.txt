@@ -1,0 +1,10 @@
+flask
+tensorflow
+pandas
+numpy
+scikit-learn
+pdfplumber
+python-docx
+pytesseract
+Pillow
+werkzeug

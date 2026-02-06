@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume AI Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-card fade-in">
+            <header>
+                <h1 class="fade-in">Resume AI Analyzer</h1>
+                <p class="subtitle fade-in" style="animation-delay: 0.2s">Elevate your career with GRU-powered
+                    intelligence</p>
+            </header>
+
+            <form action="/upload" method="post" enctype="multipart/form-data" class="upload-area" id="upload-form">
+                <input type="file" name="file" id="file" hidden accept=".pdf,.docx,.doc,.txt,.jpg,.png">
+                <div class="icon-container">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>Drag & Drop or Click to Upload</h3>
+                <p class="subtitle">Supports PDF, DOCX, TXT, IMG</p>
+            </form>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span>⚡</span>
+                    <p>Instant Analysis</p>
+                </div>
+                <div class="feature-item">
+                    <span>🧠</span>
+                    <p>GRU Neural Net</p>
+                </div>
+                <div class="feature-item">
+                    <span>🎯</span>
+                    <p>Role Prediction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const fileInput = document.getElementById('file');
+
+        form.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                form.submit();
+            }
+        });
+
+        // Drag & drop support logic
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            form.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            form.addEventListener(eventName, () => form.classList.add('dragging'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            form.addEventListener(eventName, () => form.classList.remove('dragging'), false);
+        });
+
+        form.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                form.submit();
+            }
+        }
+    </script>
+</body>
+
+</html>
