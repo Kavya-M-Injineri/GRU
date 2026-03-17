@@ -1,4 +1,4 @@
-# GRU Resume Analyzer & Job Predictor 1111111111111111111111111111111111111111111
+# GRU Resume Analyzer & Job Predictor 
 
 > An AI-powered resume analysis tool using a GRU (Gated Recurrent Unit) neural network to predict job roles from resume text with confidence scoring.
 
